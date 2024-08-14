@@ -139,8 +139,18 @@ class TestBooksCollector:
         for book_name in filtered_books:
             assert book_name in books_for_children
 
-    def test_(self):
-        ...
+    def test_add_book_in_favorites_add_two_books(
+        self
+    ):
+        collector = BooksCollector()
+
+        collector.add_new_book('Гордость и предубеждение и зомби')
+        collector.add_new_book('Что делать, если ваш кот хочет вас убить')
+
+        collector.add_book_in_favorites('Гордость и предубеждение и зомби')
+        collector.add_book_in_favorites('Что делать, если ваш кот хочет вас убить')
+
+        assert len(collector.favorites) == 2
 
     def test_(self):
         ...
