@@ -172,14 +172,24 @@ class TestBooksCollector:
 
         assert len(collector.favorites) == 0
 
-    def test_(self):
-        ...
+    def test_get_list_of_favorites_books_get_list_of_favorites_books(
+        self,
+        books
+    ):
+        collector = BooksCollector()
 
-    def test_(self):
-        ...
+        for book_name, book_genre in books.items():
+            collector.add_new_book(
+                name=book_name
+            )
+            collector.set_book_genre(
+                name=book_name,
+                genre=book_genre
+            )
+            collector.add_book_in_favorites(
+                name=book_name
+            )
 
-    def test_(self):
-        ...
+        books_favorites = collector.get_list_of_favorites_books()
 
-    def test_(self):
-        ...
+        assert list(books.keys()) == books_favorites
