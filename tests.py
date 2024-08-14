@@ -152,8 +152,25 @@ class TestBooksCollector:
 
         assert len(collector.favorites) == 2
 
-    def test_(self):
-        ...
+    @pytest.mark.parametrize(
+        'book_name',
+        [
+            'Гордость и предубеждение и зомби',
+            'Что делать, если ваш кот хочет вас убить'
+        ]
+    )
+    def test_delete_book_from_favorites_delete_book_from_favorites(
+        self,
+        book_name
+    ):
+        collector = BooksCollector()
+
+        collector.add_new_book(book_name)
+        collector.add_book_in_favorites(book_name)
+
+        collector.delete_book_from_favorites(book_name)
+
+        assert len(collector.favorites) == 0
 
     def test_(self):
         ...
