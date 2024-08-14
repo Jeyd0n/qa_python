@@ -55,11 +55,24 @@ class TestBooksCollector:
         ) == book_genre
 
     # Как называть метод, если название функции дублирует тестируемый функционал?
-    # @pytest.mark.parametrize
-    # def test_get_books_with_specific_genre_get_books_with_specific_genre(
-    #     self
-    # ):
-    #     ...
+    def test_get_books_genre_get_books_genre(
+        self,
+        books
+    ):
+        collector = BooksCollector()
+
+        for book_name, book_genre in books.items():
+            collector.add_new_book(
+                name=book_name
+            )
+            collector.set_book_genre(
+                name=book_name,
+                genre=book_genre
+            )
+
+        books_genre = collector.get_books_genre()
+
+        assert books == books_genre
         
     @pytest.mark.parametrize(
         'genre', 
@@ -71,7 +84,7 @@ class TestBooksCollector:
             'Комедии'
         ]
     )
-    def test_get_books_genre_get_books_genre(
+    def test_get_books_with_specific_genre_get_books_with_specific_genre(
         self,
         genre,
         books
