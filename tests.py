@@ -100,7 +100,7 @@ class TestBooksCollector:
                 genre=book_genre
             )
 
-        get_books_with_specific_genre_books = collector.get_books_with_specific_genre(
+        books_with_specific_genre_books = collector.get_books_with_specific_genre(
             genre=genre
         )
         books_with_required_genre = [
@@ -110,11 +110,34 @@ class TestBooksCollector:
             if book_genre == genre:
                 books_with_required_genre.append(book_name)
 
-        for book_name in get_books_with_specific_genre_books:
-            assert book_name in get_books_with_specific_genre_books
+        for book_name in books_with_required_genre:
+            assert book_name in books_with_specific_genre_books
 
-    def test_(self):
-        ...
+    def test_get_books_for_children_get_books_for_children(
+        self,
+        books
+    ):
+        collector = BooksCollector()
+
+        for book_name, book_genre in books.items():
+            collector.add_new_book(
+                name=book_name
+            )
+            collector.set_book_genre(
+                name=book_name,
+                genre=book_genre
+            )
+
+        books_for_children = collector.get_books_for_children()
+        filtered_books = [
+
+        ]
+        for book_name, book_genre in books.items():
+            if book_genre not in collector.genre_age_rating:
+                filtered_books.append(book_name)
+
+        for book_name in filtered_books:
+            assert book_name in books_for_children
 
     def test_(self):
         ...
