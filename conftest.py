@@ -1,7 +1,10 @@
 import pytest
 
 
-@pytest.fixture
+@pytest.fixture(
+    autouse=True,
+    scope='class'
+)
 def books():
     books = {
         'Мир после разрушения': 'Фантастика',
@@ -20,3 +23,5 @@ def books():
         'Горе от ума': 'Комедии',
         'Ревизор': 'Комедии'
     }
+
+    return books

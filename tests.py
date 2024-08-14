@@ -2,14 +2,8 @@ from main import BooksCollector
 import pytest
 
 
-TEST_SET_BOOK_GENRE_SET_SINGLE_BOOK_GENRE_PARAMS = [
-    ['Гордость и предубеждение и зомби', 'Фантастика'],
-    ['Что делать, если ваш кот хочет вас убить', 'Детективы']
-]
-
-
 class TestBooksCollector:
-    
+
     def test_add_new_book_add_two_books(self):
         collector = BooksCollector()
 
@@ -34,7 +28,10 @@ class TestBooksCollector:
 
     @pytest.mark.parametrize(
         'book_name, book_genre',
-        TEST_SET_BOOK_GENRE_SET_SINGLE_BOOK_GENRE_PARAMS
+        [
+            ['Гордость и предубеждение и зомби', 'Фантастика'],
+            ['Что делать, если ваш кот хочет вас убить', 'Детективы']
+        ]
     )
     def test_set_book_genre_set_single_book_genre(
         self,
@@ -51,15 +48,57 @@ class TestBooksCollector:
             genre=book_genre
         )
 
+        # Так получается, что я тестирую сразу два метода, которые отдельные друг от друга и не тестируются. 
+        # Нужно ли писать два разных теста для них или можно сделать так, как в этом тесте? Какое название тогда ставить?
         assert collector.get_book_genre(
             name=book_name
         ) == book_genre
 
-    def test_(self):
-        ...
+    # Как называть метод, если название функции дублирует тестируемый функционал?
+    # @pytest.mark.parametrize
+    # def test_get_books_with_specific_genre_get_books_with_specific_genre(
+    #     self
+    # ):
+    #     ...
+        
+    @pytest.mark.parametrize(
+        'genre', 
+        [
+            'Фантастика',
+            'Ужасы',
+            'Детективы',
+            'Мультфильмы',
+            'Комедии'
+        ]
+    )
+    def test_get_books_genre_get_books_genre(
+        self,
+        genre,
+        books
+    ):
+        collector = BooksCollector()
 
-    def test_(self):
-        ...
+        for book_name, book_genre in books.items():
+            collector.add_new_book(
+                name=book_name
+            )
+            collector.set_book_genre(
+                name=book_name,
+                genre=book_genre
+            )
+
+        get_books_with_specific_genre_books = collector.get_books_with_specific_genre(
+            genre=genre
+        )
+        books_with_required_genre = [
+
+        ]
+        for book_name, book_genre in books.items():
+            if book_genre == genre:
+                books_with_required_genre.append(book_name)
+
+        for book_name in get_books_with_specific_genre_books:
+            assert book_name in get_books_with_specific_genre_books
 
     def test_(self):
         ...
